@@ -1,6 +1,6 @@
 import { Task } from '../task';
 
-export abstract class TaskRepository {
+export abstract class TaskGateway {
   abstract getAll(): Promise<Task[]>;
 
   abstract getById(id: string): Promise<Task | null>;
