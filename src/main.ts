@@ -6,11 +6,12 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { TaskGateway } from './domain/models/task/gateway/task-gateway';
 import { LocalStorageTaskGateway } from './infrastructure/local-storage-task-gateway';
-import { CreateTaskUseCase } from './domain/usecases/create-task-usecase';
-import { GetAllTaskUseCase } from './domain/usecases/get-all-tasks-usecase';
-import { DeleteTaskUseCase } from './domain/usecases/delete-task-usecase';
-import { GetTaskByIdUseCase } from './domain/usecases/get-task-by-id-use-case';
-import { UpdateTaskUseCase } from './domain/usecases/update-task-use-case';
+import { CreateTaskUseCase } from './domain/usecases/task/create-task-usecase';
+import { DeleteTaskUseCase } from './domain/usecases/task/delete-task-usecase';
+import { GetAllTaskUseCase } from './domain/usecases/task/get-all-tasks-usecase';
+import { GetTaskByIdUseCase } from './domain/usecases/task/get-task-by-id-use-case';
+import { UpdateTaskUseCase } from './domain/usecases/task/update-task-use-case';
+
 
 bootstrapApplication(AppComponent, {
   providers: [

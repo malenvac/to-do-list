@@ -1,4 +1,4 @@
-import { TaskGateway } from '../models/task/gateway/task-gateway';
+import { TaskGateway } from 'src/domain/models/task/gateway/task-gateway';
 
 export class DeleteTaskUseCase {
     constructor(private taskGateway: TaskGateway) { }

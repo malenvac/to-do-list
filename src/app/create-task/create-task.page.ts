@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CreateTaskUseCase } from '../../domain/usecases/create-task-usecase';
-import { GetTaskByIdUseCase } from '../../domain/usecases/get-task-by-id-use-case';
-import { UpdateTaskUseCase } from '../../domain/usecases/update-task-use-case';
+
 import { Task } from '../../domain/models/task/task';
 import { v4 as uuidv4 } from 'uuid';
+import { CreateTaskUseCase } from 'src/domain/usecases/task/create-task-usecase';
+import { GetTaskByIdUseCase } from 'src/domain/usecases/task/get-task-by-id-use-case';
+import { UpdateTaskUseCase } from 'src/domain/usecases/task/update-task-use-case';
 
 @Component({
     selector: 'app-create-task',
