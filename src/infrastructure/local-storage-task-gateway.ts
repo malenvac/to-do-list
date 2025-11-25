@@ -25,16 +25,25 @@ export class LocalStorageTaskGateway extends TaskGateway {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(tasks));
   }
 
-  // Los demás métodos se implementarán después
-  async getById(): Promise<any> {
-    throw new Error("Not implemented yet");
+  async getById(id: string): Promise<Task | null> {
+    const tasks = await this.getAll();
+    const task = tasks.find((t) => t.id === id);
+    return task || null;
   }
 
-  async update(): Promise<any> {
-    throw new Error("Not implemented yet");
+  async update(task: Task): Promise<void> {
+    const tasks = await this.getAll();
+    const index = tasks.findIndex((t) => t.id === task.id);
+
+    if (index !== -1) {
+      tasks[index] = task;
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(tasks));
+    }
   }
 
-  async delete(): Promise<any> {
-    throw new Error("Not implemented yet");
+  async delete(id: string): Promise<void> {
+    const tasks = await this.getAll();
+    const filteredTasks = tasks.filter((t) => t.id !== id);
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(filteredTasks));
   }
 }

@@ -8,6 +8,7 @@ import { TaskGateway } from './domain/models/task/gateway/task-gateway';
 import { LocalStorageTaskGateway } from './infrastructure/local-storage-task-gateway';
 import { CreateTaskUseCase } from './domain/usecases/create-task-usecase';
 import { GetAllTaskUseCase } from './domain/usecases/get-all-tasks-usecase';
+import { DeleteTaskUseCase } from './domain/usecases/delete-task-usecase';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -23,6 +24,11 @@ bootstrapApplication(AppComponent, {
     {
       provide: GetAllTaskUseCase,
       useFactory: (gateway: TaskGateway) => new GetAllTaskUseCase(gateway),
+      deps: [TaskGateway],
+    },
+    {
+      provide: DeleteTaskUseCase,
+      useFactory: (gateway: TaskGateway) => new DeleteTaskUseCase(gateway),
       deps: [TaskGateway],
     },
   ],
