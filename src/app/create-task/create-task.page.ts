@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CreateTaskUseCase } from '../../domain/usecases/create-task-usecase';
+import { GetTaskByIdUseCase } from '../../domain/usecases/get-task-by-id-use-case';
+import { UpdateTaskUseCase } from '../../domain/usecases/update-task-use-case';
 import { Task } from '../../domain/models/task/task';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -14,27 +16,59 @@ import { v4 as uuidv4 } from 'uuid';
     standalone: true,
     imports: [IonicModule, CommonModule, FormsModule]
 })
-export class CreateTaskPage {
+export class CreateTaskPage implements OnInit {
     title: string = '';
+    isEditMode: boolean = false;
+    taskId: string | null = null;
+    taskCreatedAt: number = Date.now();
+    taskCompleted: boolean = false;
 
     constructor(
         private createTaskUseCase: CreateTaskUseCase,
-        private router: Router
+        private getTaskByIdUseCase: GetTaskByIdUseCase,
+        private updateTaskUseCase: UpdateTaskUseCase,
+        private router: Router,
+        private route: ActivatedRoute
     ) { }
+
+    async ngOnInit() {
+        this.taskId = this.route.snapshot.paramMap.get('id');
+        if (this.taskId) {
+            this.isEditMode = true;
+            const task = await this.getTaskByIdUseCase.run(this.taskId);
+            if (task) {
+                this.title = task.title;
+                this.taskCreatedAt = task.createdAt;
+                this.taskCompleted = task.completed;
+            }
+        }
+    }
 
     async saveTask() {
         if (!this.title.trim()) {
             return;
         }
 
-        const newTask: Task = {
-            id: uuidv4(),
-            title: this.title,
-            completed: false,
-            createdAt: Date.now()
-        };
+        if (this.isEditMode && this.taskId) {
+            const updatedTask: Task = {
+                id: this.taskId,
+                title: this.title,
+                completed: this.taskCompleted,
+                createdAt: this.taskCreatedAt,
+                updatedAt: Date.now()
+            };
 
-        await this.createTaskUseCase.run(newTask);
+            await this.updateTaskUseCase.run(updatedTask);
+        } else {
+            const newTask: Task = {
+                id: uuidv4(),
+                title: this.title,
+                completed: false,
+                createdAt: Date.now()
+            };
+            await this.createTaskUseCase.run(newTask);
+        }
+
         this.router.navigate(['/home']);
     }
 }

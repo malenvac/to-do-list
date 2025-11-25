@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { add, trash } from 'ionicons/icons';
+import { add, trash, create } from 'ionicons/icons';
 import { GetAllTaskUseCase } from '../../domain/usecases/get-all-tasks-usecase';
 import { Task } from '../../domain/models/task/task';
 import { DeleteTaskUseCase } from '../../domain/usecases/delete-task-usecase';
 import { GetTaskByIdUseCase } from '../../domain/usecases/get-task-by-id-use-case';
+
+import { UpdateTaskUseCase } from '../../domain/usecases/update-task-use-case';
 
 @Component({
   selector: 'app-home',
@@ -23,9 +25,10 @@ export class HomePage {
   constructor(
     private getAllTaskUseCase: GetAllTaskUseCase,
     private deleteTaskUseCase: DeleteTaskUseCase,
-    private getTaskByIdUseCase: GetTaskByIdUseCase
+    private getTaskByIdUseCase: GetTaskByIdUseCase,
+    private updateTaskUseCase: UpdateTaskUseCase
   ) {
-    addIcons({ add, trash });
+    addIcons({ add, trash, create });
   }
 
   async ionViewWillEnter() {
@@ -49,6 +52,12 @@ export class HomePage {
 
   async deleteTask(id: string) {
     await this.deleteTaskUseCase.run(id);
+    await this.loadTasks();
+  }
+
+  async toggleCompletion(task: Task, event: any) {
+    const updatedTask = { ...task, completed: event.detail.checked, updatedAt: Date.now() };
+    await this.updateTaskUseCase.run(updatedTask);
     await this.loadTasks();
   }
 }

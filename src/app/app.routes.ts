@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadComponent: () => import('./create-task/create-task.page').then(m => m.CreateTaskPage)
   },
   {
+    path: 'edit-task/:id',
+    loadComponent: () => import('./create-task/create-task.page').then(m => m.CreateTaskPage)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
