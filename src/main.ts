@@ -5,7 +5,7 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { TaskGateway } from './domain/models/task/gateway/task-gateway';
-import { LocalStorageTaskGateway } from './infrastructure/local-storage-task-gateway';
+import { LocalStorageTaskGateway } from './infrastructure/task/local-storage-task-gateway';
 import { CreateTaskUseCase } from './domain/usecases/task/create-task-usecase';
 import { DeleteTaskUseCase } from './domain/usecases/task/delete-task-usecase';
 import { GetAllTaskUseCase } from './domain/usecases/task/get-all-tasks-usecase';

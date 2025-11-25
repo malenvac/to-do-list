@@ -1,5 +1,5 @@
-import { Task } from '../domain/models/task/task';
-import { TaskGateway } from '../domain/models/task/gateway/task-gateway';
+import { Task } from '../../domain/models/task/task';
+import { TaskGateway } from '../../domain/models/task/gateway/task-gateway';
 
 export class LocalStorageTaskGateway extends TaskGateway {
   private readonly STORAGE_KEY = 'tasks';
