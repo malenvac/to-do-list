@@ -9,6 +9,8 @@ import { LocalStorageTaskGateway } from './infrastructure/local-storage-task-gat
 import { CreateTaskUseCase } from './domain/usecases/create-task-usecase';
 import { GetAllTaskUseCase } from './domain/usecases/get-all-tasks-usecase';
 import { DeleteTaskUseCase } from './domain/usecases/delete-task-usecase';
+import { GetTaskByIdUseCase } from './domain/usecases/get-task-by-id-use-case';
+import { UpdateTaskUseCase } from './domain/usecases/update-task-use-case';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -29,6 +31,16 @@ bootstrapApplication(AppComponent, {
     {
       provide: DeleteTaskUseCase,
       useFactory: (gateway: TaskGateway) => new DeleteTaskUseCase(gateway),
+      deps: [TaskGateway],
+    },
+    {
+      provide: GetTaskByIdUseCase,
+      useFactory: (gateway: TaskGateway) => new GetTaskByIdUseCase(gateway),
+      deps: [TaskGateway],
+    },
+    {
+      provide: UpdateTaskUseCase,
+      useFactory: (gateway: TaskGateway) => new UpdateTaskUseCase(gateway),
       deps: [TaskGateway],
     },
   ],
