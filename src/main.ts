@@ -4,11 +4,26 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+import { TaskGateway } from './domain/models/task/gateway/task-gateway';
+import { LocalStorageTaskGateway } from './infrastructure/local-storage-task-gateway';
+import { CreateTaskUseCase } from './domain/usecases/create-task-usecase';
+import { GetAllTaskUseCase } from './domain/usecases/get-all-tasks-usecase';
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
+    { provide: TaskGateway, useClass: LocalStorageTaskGateway },
+    {
+      provide: CreateTaskUseCase,
+      useFactory: (gateway: TaskGateway) => new CreateTaskUseCase(gateway),
+      deps: [TaskGateway],
+    },
+    {
+      provide: GetAllTaskUseCase,
+      useFactory: (gateway: TaskGateway) => new GetAllTaskUseCase(gateway),
+      deps: [TaskGateway],
+    },
   ],
 });
