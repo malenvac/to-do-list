@@ -12,12 +12,14 @@ import { GetAllTaskUseCase } from './domain/usecases/task/get-all-tasks-usecase'
 import { GetTaskByIdUseCase } from './domain/usecases/task/get-task-by-id-use-case';
 import { UpdateTaskUseCase } from './domain/usecases/task/update-task-use-case';
 import { addIcons } from 'ionicons';
-import { add, listOutline, folderOpenOutline } from 'ionicons/icons';
+import { add, listOutline, folderOpenOutline,createOutline, trashOutline } from 'ionicons/icons';
 
 addIcons({
   add,
   listOutline,
-  folderOpenOutline
+  folderOpenOutline,
+  createOutline,
+  trashOutline
 });
 
 

@@ -1,49 +1,68 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tasks
-    </ion-title>
+    <ion-title>Tasks</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tasks</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-searchbar (ionInput)="handleSearch($event)" placeholder="Search by ID"></ion-searchbar>
+  <ion-searchbar 
+    (ionInput)="handleSearch($event)" 
+    placeholder="Search by ID">
+  </ion-searchbar>
 
   <ion-list>
-    <ion-item *ngFor="let task of tasks">
-      <ion-checkbox slot="start" [checked]="task.completed" (ionChange)="toggleCompletion(task, $event)"></ion-checkbox>
+    <ion-item *ngFor="let task of tasks" class="task-card">
+
+      <!-- Checkbox -->
+      <ion-checkbox
+        slot="start"
+        [checked]="task.completed"
+        (ionChange)="toggleCompletion(task, $event)">
+      </ion-checkbox>
+
+      <!-- Contenido -->
       <ion-label>
-        <h2>{{ task.title }}</h2>
-        <p>ID: {{ task.id }}</p>
-        <p>{{ task.createdAt | date:'medium' }}</p>
+        <h2 class="task-title">{{ task.title }}</h2>
+        <p class="task-date">{{ task.createdAt | date:'MMM d, y, h:mm a' }}</p>
       </ion-label>
-      <ion-button slot="end" fill="clear" [routerLink]="['/edit-task', task.id]">
-        <ion-icon name="create" slot="icon-only"></ion-icon>
-      </ion-button>
-      <ion-button slot="end" fill="clear" color="danger" (click)="deleteTask(task.id)">
-        <ion-icon name="trash" slot="icon-only"></ion-icon>
-      </ion-button>
+
+      <!-- Botones -->
+      <ion-buttons slot="end">
+
+          <ion-button fill="clear" [routerLink]="['/edit-task', task.id]">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button fill="clear" color="danger" (click)="deleteTask(task.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+
+      </ion-buttons>
+
+
     </ion-item>
   </ion-list>
 
   <div *ngIf="tasks.length === 0" class="ion-text-center ion-padding">
-    <p>No tasks found. Create one!</p>
+    <p>No tienes tareas, crea una para empezar</p>
   </div>
-  
+
 </ion-content>
+
 <ion-footer>
   <ion-toolbar class="bottom-bar">
     <div class="bottom-nav">
 
       <button class="bottom-btn" routerLink="/home">
         <ion-icon name="list-outline"></ion-icon>
-        <span>Tasks</span>
+        <span>Tareas</span>
       </button>
 
       <button class="center-btn" routerLink="/create-task">
@@ -52,7 +71,7 @@
 
       <button class="bottom-btn" routerLink="/categories">
         <ion-icon name="folder-open-outline"></ion-icon>
-        <span>Categories</span>
+        <span>Categorías</span>
       </button>
 
     </div>
