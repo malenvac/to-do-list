@@ -1,0 +1,76 @@
+<ion-content [fullscreen]="true">
+
+
+  <div class="create-header-card">
+    <div style="display: flex; align-items: center; gap: 12px;">
+
+     
+      <button class="back-icon-btn" (click)="goBack()">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+      </button>
+
+     
+      <div class="create-header-text">
+        <h2 class="create-header-title">
+          {{ isEditMode ? 'Editar tarea' : 'Agregar nueva tarea' }}
+        </h2>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="create-form">
+
+    <label class="field-label">Título de la tarea</label>
+    <ion-item lines="none" class="field-item">
+      <ion-input
+        placeholder="Escribe el título de la tarea"
+        [(ngModel)]="title">
+      </ion-input>
+    </ion-item>
+
+    <label class="field-label">Descripción</label>
+    <ion-item lines="none" class="field-item textarea-item">
+      <ion-textarea
+        placeholder="Escribe una descripción (opcional)"
+        autoGrow="true"
+        [(ngModel)]="description">
+      </ion-textarea>
+    </ion-item>
+
+    
+    <div class="category-section">
+      <label class="field-label">Selecciona categoría</label>
+
+      <div class="category-list">
+
+      
+        <button 
+          *ngFor="let category of categories"
+          class="category-chip"
+          [class.active]="selectedCategoryId === category.id"
+          (click)="selectCategory(category)">
+          {{ category.name }}
+        </button>
+
+        
+        <button 
+          class="category-chip"
+         (click)="goToCreateCategory()"
+>
+          +
+        </button>
+
+      </div>
+    </div>
+
+ 
+    <div class="button-wrapper">
+      <ion-button expand="block" (click)="saveTask()" [disabled]="!title.trim()">
+        {{ isEditMode ? 'Actualizar tarea' : 'Guardar tarea' }}
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

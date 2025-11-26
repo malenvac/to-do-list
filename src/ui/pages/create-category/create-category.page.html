@@ -1,0 +1,36 @@
+<ion-content [fullscreen]="true">
+
+ 
+  <div class="create-header-card">
+    <div class="create-header-top">
+      <button class="back-icon-btn" (click)="goBack()">
+        <ion-icon name="arrow-back-circle-outline"></ion-icon>
+      </button>
+
+      <div class="create-header-text">
+        <h1 class="create-header-title">
+          {{ isEditMode ? 'Editar categoría' : 'Nueva categoría' }}
+        </h1>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="create-form">
+    <label class="field-label">Nombre de la categoría</label>
+
+    <ion-item class="field-item">
+      <ion-input
+        [(ngModel)]="name"
+        placeholder="Escribe el nombre de la categoría">
+      </ion-input>
+    </ion-item>
+
+    <div class="button-wrapper">
+      <ion-button expand="block" (click)="saveCategory()">
+        {{ isEditMode ? 'ACTUALIZAR CATEGORÍA' : 'GUARDAR CATEGORÍA' }}
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>
