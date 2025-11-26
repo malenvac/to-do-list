@@ -87,5 +87,42 @@
   font-size: 13px;
   color: #777;
 }
+.home-header-card {
+  background: var(--ion-color-primary);
+  padding: 32px 16px ;
+  color: #fff;
+}
+
+.home-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.header-icon {
+  font-size: 26px;
+  color: #fff;
+}
+
+.header-text {
+  flex: 1;
+  margin: 0 12px;
+}
+
+
+
+.header-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 2px 0 0;
+}
+
+.header-search {
+  --background: #ffffff;
+  --color: #444;
+  --placeholder-color: #999;
+  --border-radius: 999px;
+}
 
 

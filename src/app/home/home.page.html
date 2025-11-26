@@ -1,52 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Tasks</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tasks</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- HEADER CARD -->
+  <div class="home-header-card">
+    <div class="home-header-row">
+      <ion-icon name="grid-outline" class="header-icon"></ion-icon>
 
-  <ion-searchbar 
-    (ionInput)="handleSearch($event)" 
-    placeholder="Search by ID">
-  </ion-searchbar>
+      <div class="header-text">
+       <h1 class="header-title">Mis tareas</h1>
+      </div>
 
+      <ion-icon name="ellipsis-horizontal" class="header-icon"></ion-icon>
+    </div>
+
+    <ion-searchbar
+      class="header-search"
+      placeholder="Buscar por ID"
+      (ionInput)="handleSearch($event)">
+    </ion-searchbar>
+  </div>
+
+  <!-- TU LISTA DE TARJETAS -->
   <ion-list>
     <ion-item *ngFor="let task of tasks" class="task-card">
-
-      <!-- Checkbox -->
-      <ion-checkbox
-        slot="start"
-        [checked]="task.completed"
-        (ionChange)="toggleCompletion(task, $event)">
+      <!-- lo que ya tienes dentro de la tarjeta -->
+      <ion-checkbox slot="start"
+                    [checked]="task.completed"
+                    (ionChange)="toggleCompletion(task, $event)">
       </ion-checkbox>
 
-      <!-- Contenido -->
       <ion-label>
         <h2 class="task-title">{{ task.title }}</h2>
-        <p class="task-date">{{ task.createdAt | date:'MMM d, y, h:mm a' }}</p>
+        <p class="task-date">
+          {{ task.createdAt | date:'MMM d, y, h:mm a' }}
+        </p>
       </ion-label>
 
-      <!-- Botones -->
       <ion-buttons slot="end">
-
-          <ion-button fill="clear" [routerLink]="['/edit-task', task.id]">
-            <ion-icon name="create-outline"></ion-icon>
-          </ion-button>
-
-          <ion-button fill="clear" color="danger" (click)="deleteTask(task.id)">
-            <ion-icon name="trash-outline"></ion-icon>
-          </ion-button>
-
+        <ion-button fill="clear" [routerLink]="['/edit-task', task.id]">
+          <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="deleteTask(task.id)">
+          <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+        </ion-button>
       </ion-buttons>
-
-
     </ion-item>
   </ion-list>
 
@@ -55,6 +51,9 @@
   </div>
 
 </ion-content>
+
+
+
 
 <ion-footer>
   <ion-toolbar class="bottom-bar">
