@@ -2,8 +2,8 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 
-import { routes } from './app/app.routes';
-import { AppComponent } from './app/app.component';
+import { routes } from './ui/app.routes';
+import { AppComponent } from './ui/app.component';
 import { TaskGateway } from './domain/models/task/gateway/task-gateway';
 import { LocalStorageTaskGateway } from './infrastructure/task/local-storage-task-gateway';
 import { CreateTaskUseCase } from './domain/usecases/task/create-task-usecase';
@@ -11,15 +11,24 @@ import { DeleteTaskUseCase } from './domain/usecases/task/delete-task-usecase';
 import { GetAllTaskUseCase } from './domain/usecases/task/get-all-tasks-usecase';
 import { GetTaskByIdUseCase } from './domain/usecases/task/get-task-by-id-use-case';
 import { UpdateTaskUseCase } from './domain/usecases/task/update-task-use-case';
+import { CategoryGateway } from './domain/models/category/gateway/category-gateway';
+import { LocalStorageCategoryGateway } from './infrastructure/category/local-storage-task-gateway';
+import { CreateCategoryUseCase } from './domain/usecases/category/create-category-use-case';
+import { GetAllCategoriesUseCase } from './domain/usecases/category/get-all-categories-use-case';
+import { DeleteCategoryUseCase } from './domain/usecases/category/delete-category-use-case';
+import { UpdateCategoryUseCase } from './domain/usecases/category/update-category-use-case';
+import { GetCategoryByIdUseCase } from './domain/usecases/category/get-category-by-id-use-case';
+import { GetCategoryByNameUseCase } from './domain/usecases/category/get-category-by-name-use-case';
 import { addIcons } from 'ionicons';
-import { add, listOutline, folderOpenOutline,createOutline, trashOutline } from 'ionicons/icons';
+import { add, listOutline, folderOpenOutline, createOutline, trashOutline, folderOutline } from 'ionicons/icons';
 
 addIcons({
   add,
   listOutline,
   folderOpenOutline,
   createOutline,
-  trashOutline
+  trashOutline,
+  folderOutline
 });
 
 
@@ -54,6 +63,38 @@ bootstrapApplication(AppComponent, {
       provide: UpdateTaskUseCase,
       useFactory: (gateway: TaskGateway) => new UpdateTaskUseCase(gateway),
       deps: [TaskGateway],
+    },
+    // Category providers
+    { provide: CategoryGateway, useClass: LocalStorageCategoryGateway },
+    {
+      provide: CreateCategoryUseCase,
+      useFactory: (gateway: CategoryGateway) => new CreateCategoryUseCase(gateway),
+      deps: [CategoryGateway],
+    },
+    {
+      provide: GetAllCategoriesUseCase,
+      useFactory: (gateway: CategoryGateway) => new GetAllCategoriesUseCase(gateway),
+      deps: [CategoryGateway],
+    },
+    {
+      provide: DeleteCategoryUseCase,
+      useFactory: (gateway: CategoryGateway) => new DeleteCategoryUseCase(gateway),
+      deps: [CategoryGateway],
+    },
+    {
+      provide: UpdateCategoryUseCase,
+      useFactory: (gateway: CategoryGateway) => new UpdateCategoryUseCase(gateway),
+      deps: [CategoryGateway],
+    },
+    {
+      provide: GetCategoryByIdUseCase,
+      useFactory: (gateway: CategoryGateway) => new GetCategoryByIdUseCase(gateway),
+      deps: [CategoryGateway],
+    },
+    {
+      provide: GetCategoryByNameUseCase,
+      useFactory: (gateway: CategoryGateway) => new GetCategoryByNameUseCase(gateway),
+      deps: [CategoryGateway],
     },
   ],
 });

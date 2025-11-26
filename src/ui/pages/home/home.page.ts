@@ -5,11 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { add, trash, create, gridOutline, ellipsisHorizontal } from 'ionicons/icons';
-import { Task } from '../../domain/models/task/task';
-import { GetAllTaskUseCase } from 'src/domain/usecases/task/get-all-tasks-usecase';
-import { DeleteTaskUseCase } from 'src/domain/usecases/task/delete-task-usecase';
-import { GetTaskByIdUseCase } from 'src/domain/usecases/task/get-task-by-id-use-case';
-import { UpdateTaskUseCase } from 'src/domain/usecases/task/update-task-use-case';
+import { Task } from '../../../domain/models/task/task';
+import { GetAllTaskUseCase } from '../../../domain/usecases/task/get-all-tasks-usecase';
+import { DeleteTaskUseCase } from '../../../domain/usecases/task/delete-task-usecase';
+import { GetTaskByIdUseCase } from '../../../domain/usecases/task/get-task-by-id-use-case';
+import { UpdateTaskUseCase } from '../../../domain/usecases/task/update-task-use-case';
 
 @Component({
   selector: 'app-home',

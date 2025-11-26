@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/categories"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ isEditMode ? 'Editar Categoría' : 'Nueva Categoría' }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <div class="form-container">
+        <ion-item>
+            <ion-input label="Nombre de la categoría" labelPlacement="floating" [(ngModel)]="name"
+                placeholder="Ingresa el nombre"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" (click)="saveCategory()" class="save-btn">
+            {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+        </ion-button>
+    </div>
+</ion-content>
