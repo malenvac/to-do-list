@@ -20,8 +20,11 @@ import { UpdateCategoryUseCase } from './domain/usecases/category/update-categor
 import { GetCategoryByIdUseCase } from './domain/usecases/category/get-category-by-id-use-case';
 import { GetCategoryByNameUseCase } from './domain/usecases/category/get-category-by-name-use-case';
 import { addIcons } from 'ionicons';
+import { initializeRemoteConfig } from './firebase/remote-config-init';
+
 import { add, listOutline, folderOpenOutline, createOutline, trashOutline, folderOutline,  arrowBackCircleOutline
  } from 'ionicons/icons';
+
 
 addIcons({
   add,
@@ -34,7 +37,9 @@ addIcons({
 
 });
 
-
+(async () => {
+  await initializeRemoteConfig();
+})();
 
 bootstrapApplication(AppComponent, {
   providers: [

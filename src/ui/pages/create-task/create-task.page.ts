@@ -32,6 +32,8 @@ export class CreateTaskPage implements OnInit {
 
     categories: Category[] = [];
     selectedCategoryId: string | null = null;
+    selectedCategoryName: string | null = null;
+
 
     constructor(
         private createTaskUseCase: CreateTaskUseCase,
@@ -91,6 +93,7 @@ export class CreateTaskPage implements OnInit {
                 createdAt: this.taskCreatedAt,
                 updatedAt: Date.now(),
                 categoryId: this.selectedCategoryId ?? null,
+                categoryName: this.selectedCategoryName ?? null
             };
 
             await this.updateTaskUseCase.run(updatedTask);
@@ -103,7 +106,9 @@ export class CreateTaskPage implements OnInit {
                 description: this.description,
                 completed: false,
                 createdAt: Date.now(),
+                
                 categoryId: this.selectedCategoryId ?? null,
+                categoryName: this.selectedCategoryName ?? null
             };
 
             await this.createTaskUseCase.run(newTask);
@@ -114,5 +119,6 @@ export class CreateTaskPage implements OnInit {
 
     selectCategory(category: Category) {
         this.selectedCategoryId = category.id;
+        this.selectedCategoryName = category.name;
     }
 }

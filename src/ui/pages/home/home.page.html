@@ -1,12 +1,10 @@
 <ion-content [fullscreen]="true">
-
-  <!-- HEADER CARD -->
   <div class="home-header-card">
     <div class="home-header-row">
       <ion-icon name="grid-outline" class="header-icon"></ion-icon>
 
       <div class="header-text">
-       <h1 class="header-title">Mis tareas</h1>
+        <h1 class="header-title">Mis tareas</h1>
       </div>
 
       <ion-icon name="ellipsis-horizontal" class="header-icon"></ion-icon>
@@ -14,18 +12,17 @@
 
     <ion-searchbar
       class="header-search"
-      placeholder="Buscar por ID"
+      placeholder="Buscar por ID o nombre"
       (ionInput)="handleSearch($event)">
     </ion-searchbar>
   </div>
 
-  <!-- TU LISTA DE TARJETAS -->
   <ion-list>
     <ion-item *ngFor="let task of tasks" class="task-card">
-      <!-- lo que ya tienes dentro de la tarjeta -->
-      <ion-checkbox slot="start"
-                    [checked]="task.completed"
-                    (ionChange)="toggleCompletion(task, $event)">
+      <ion-checkbox
+        slot="start"
+        [checked]="task.completed"
+        (ionChange)="toggleCompletion(task, $event)">
       </ion-checkbox>
 
       <ion-label>
@@ -33,9 +30,11 @@
         <p class="task-date">
           {{ task.createdAt | date:'MMM d, y, h:mm a' }}
         </p>
-        <p class="task-category" *ngIf="task.category">
-          {{ task.category }}
+
+        <p class="task-category" *ngIf="task.categoryName">
+          {{ task.categoryName }}
         </p>
+
       </ion-label>
 
       <ion-buttons slot="end">
@@ -52,11 +51,7 @@
   <div *ngIf="tasks.length === 0" class="ion-text-center ion-padding">
     <p>No tienes tareas, crea una para empezar</p>
   </div>
-
 </ion-content>
-
-
-
 
 <ion-footer>
   <ion-toolbar class="bottom-bar">
@@ -71,7 +66,10 @@
         <ion-icon name="add"></ion-icon>
       </button>
 
-      <button class="bottom-btn" routerLink="/categories">
+      <button
+        class="bottom-btn"
+        [class.disabled]="!categoriesEnabled"
+        (click)="openCategories()">
         <ion-icon name="folder-open-outline"></ion-icon>
         <span>Categorías</span>
       </button>
