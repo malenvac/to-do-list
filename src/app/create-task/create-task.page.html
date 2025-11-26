@@ -1,27 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ isEditMode ? 'Editar tarea' : 'Crear tarea' }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item>
+
+  
+  <div class="create-header-card">
+  <div style="display: flex; align-items: center; gap: 12px;">
+    
+    
+    <button class="back-icon-btn" (click)="goBack()">
+      <ion-icon name="arrow-back-circle-outline"></ion-icon>
+    </button>
+
+    
+    <div class="create-header-text">
+      <h2 class="create-header-title">Agregar nueva tarea</h2>
+    </div>
+
+  </div>
+</div>
+
+
+  
+  <div class="create-form">
+    
+    <label class="field-label">Título de la tarea</label>
+    <ion-item lines="none" class="field-item">
       <ion-input
-        label="Título de la tarea"
-        labelPlacement="floating"
-        placeholder="Escribe el título"
+        placeholder="Escribe el título de la tarea"
         [(ngModel)]="title">
       </ion-input>
     </ion-item>
-  </ion-list>
 
-  <div class="ion-padding">
-    <ion-button expand="block" (click)="saveTask()" [disabled]="!title.trim()">
-      Guardar tarea
-    </ion-button>
+  
+    <label class="field-label">Descripción</label>
+    <ion-item lines="none" class="field-item textarea-item">
+      <ion-textarea
+        placeholder="Escribe una descripción (opcional)"
+        autoGrow="true"
+        [(ngModel)]="description">
+      </ion-textarea>
+    </ion-item>
+
+   
+    <div class="button-wrapper">
+      <ion-button expand="block" (click)="saveTask()" [disabled]="!title.trim()">
+        {{ isEditMode ? 'Actualizar tarea' : 'Guardar tarea' }}
+      </ion-button>
+    </div>
   </div>
 </ion-content>

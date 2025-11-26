@@ -19,6 +19,7 @@ import { UpdateTaskUseCase } from 'src/domain/usecases/task/update-task-use-case
 })
 export class CreateTaskPage implements OnInit {
     title: string = '';
+    description: string = '';
     isEditMode: boolean = false;
     taskId: string | null = null;
     taskCreatedAt: number = Date.now();
@@ -44,7 +45,9 @@ export class CreateTaskPage implements OnInit {
             }
         }
     }
-
+     goBack() {
+        this.router.navigate(['/home']);
+    }
     async saveTask() {
         if (!this.title.trim()) {
             return;
@@ -72,4 +75,5 @@ export class CreateTaskPage implements OnInit {
 
         this.router.navigate(['/home']);
     }
+
 }
